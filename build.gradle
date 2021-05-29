@@ -1,0 +1,113 @@
+plugins {
+    id 'com.android.library'
+}
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+        multiDexEnabled true
+        //配置阿里ARouter路由
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+        ndk {
+            //APP的build.gradle设置支持的SO库架构
+            abiFilters  'armeabi-v7a'
+        }
+    }
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    buildTypes {
+        release {
+            buildConfigField "boolean", "IS_DEBUG", "false"
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        //测试
+        debug{
+            buildConfigField "boolean", "IS_DEBUG", "true"
+            //混淆
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    resourcePrefix "${project.name}_"
+}
+
+dependencies {
+    //implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation rootProject.ext.dependencies["androidx-appcompat"]
+    implementation rootProject.ext.dependencies["design"]
+    api rootProject.ext.dependencies["androidx-annotation"]
+    api rootProject.ext.dependencies["viewpager2"]
+
+    // If you want to bind to Android-specific lifecycles
+    implementation rootProject.ext.dependencies["YCStatusBarLib"]
+    api rootProject.ext.dependencies["rxlifecycle"]
+    api rootProject.ext.dependencies["rxlifecycle-android"]
+// If you want pre-written Activities and Fragments you can subclass as providers
+    api rootProject.ext.dependencies["rxlifecycle-components"]
+
+    api rootProject.ext.dependencies["glide"]
+    api rootProject.ext.dependencies["multidex"]
+    api rootProject.ext.dependencies["router"]
+    annotationProcessor rootProject.ext.dependencies["router-compiler"]
+
+    //api  'me.yokeyword:fragmentationx:1.0.2'
+    api 'com.amap.api:location:latest.integration'////定位功能
+    //高德地图sdk相关
+    api 'com.amap.api:navi-3dmap:latest.integration'//导航
+    api 'com.amap.api:search:latest.integration'//搜索
+    //权限相关
+    api 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
+    api 'pub.devrel:easypermissions:3.0.0'
+    //多线程相关
+    api rootProject.ext.dependencies["YCThreadPoolLib"]
+    //网络请求相关
+    api rootProject.ext.dependencies["okgo"]
+    api rootProject.ext.dependencies["okrx"]
+    api rootProject.ext.dependencies["rxjava"]
+    api rootProject.ext.dependencies["rxandroid"]
+
+    api rootProject.ext.dependencies["recyclerview-v7"]
+
+    api rootProject.ext.dependencies["eventbus3"]
+    api rootProject.ext.dependencies["gson"]
+    api rootProject.ext.dependencies["fastjson"]
+    api project(':app_libs:easyPhotos')
+    //大图查看相关
+    api 'com.readystatesoftware.chuck:library:1.0.4'
+    api 'com.alexvasilkov:gesture-views:2.5.2'//大图查看
+    api 'com.davemorrissey.labs:subsampling-scale-image-view:3.10.0'
+
+    api 'com.tencent.bugly:crashreport:latest.release' //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
+    api 'com.tencent.bugly:nativecrashreport:latest.release' //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
+//    api 'com.tencent.bugly:crashreport_upgrade:latest.release'//其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.0
+    //api rootProject.ext.dependencies["easyphotos"]
+    api 'com.jakewharton.rxbinding3:rxbinding:3.0.0-alpha2'
+    //微信支付
+    api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.1.6'
+}

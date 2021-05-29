@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CardFlip">
+        <attr name="cf_front" format="reference" />
+        <attr name="cf_back" format="reference" />
+        <attr name="cf_animationDuration" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="CircleImageView">
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
+    </declare-styleable>
+
+    <!-- progress涉及的style -->
+    <declare-styleable name="NumberProgressBar">
+        <attr name="loan_progress" format="integer" />
+        <attr name="loan_max" format="integer" />
+        <attr name="loan_progress_unreached_color" format="color" />
+        <attr name="loan_progress_reached_color" format="color" />
+        <attr name="loan_progress_reached_bar_height" format="dimension" />
+        <attr name="loan_progress_unreached_bar_height" format="dimension" />
+        <attr name="loan_progress_text_size" format="dimension" />
+        <attr name="loan_progress_text_color" format="color" />
+        <attr name="loan_progress_text_offset" format="dimension" />
+        <attr name="loan_progress_txt_visibility" format="enum">
+            <enum name="visible" value="0" />
+            <enum name="invisible" value="1" />
+        </attr>
+    </declare-styleable>
+</resources>

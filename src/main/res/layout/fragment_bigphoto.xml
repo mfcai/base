@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <com.alexvasilkov.gestures.views.GestureImageView
+          android:visibility="gone"
+          android:id="@+id/gesture_image"
+          android:layout_width="match_parent"
+          android:layout_gravity="center"
+          android:layout_height="match_parent"/>
+
+    <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+        android:visibility="gone"
+        android:id="@+id/scale_image"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_share"
+            android:layout_margin="20dp"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <ImageView
+            android:id="@+id/iv_down"
+            android:layout_margin="20dp"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+
+</RelativeLayout>
